@@ -1,6 +1,3 @@
-[manifest]
-group-filter = ["-babblesim", "-optional"]
-
 [[manifest.projects]]
 name = "zmk"
 url = "https://github.com/petejohanson/zmk"
@@ -74,6 +71,9 @@ url = "https://github.com/zephyrproject-rtos/sof"
 revision = "c0f20b69daa44e3563f970b366e49ccfcfa1b71c"
 path = "modules/audio/sof"
 groups = ["optional"]
+
+[manifest.projects.nix]
+hash = "sha256-/RPgYRPFK3LpG2oibhthbkxBgcutNg2YK7KodPtpSsY="
 
 [[manifest.projects]]
 name = "tf-m-tests"

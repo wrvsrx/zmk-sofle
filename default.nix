@@ -1,26 +1,55 @@
-{ buildKeyboard }:
+{
+  stdenv,
+  zephyr, # from zephyr-nix
+  callPackage,
+  cmake,
+  ninja,
+  west2nix,
+  gitMinimal,
+}:
+
+let
+  west2nixHook = west2nix.mkWest2nixHook {
+    manifest = ./west2nix.toml;
+  };
+
+in
 {
   packages = {
-    sofle_reset = buildKeyboard {
+    sofle_reset = stdenv.mkDerivation {
       name = "sofle_reset";
       src = ./.;
-      board = "nice_nano_v2";
-      shield = "settings_reset";
-      zephyrDepsHash = "sha256-H/ZlKyRiEZmDkVE3SSVcFsEF9tQ7XOCgbQ2tPpO2Pys=";
-    };
-    sofle_left = buildKeyboard {
-      name = "sofle_left";
-      src = ./.;
-      board = "sofle_left";
-      shield = "nice_view_adapter nice_view";
-      zephyrDepsHash = "sha256-H/ZlKyRiEZmDkVE3SSVcFsEF9tQ7XOCgbQ2tPpO2Pys=";
-    };
-    sofle_right = buildKeyboard {
-      name = "sofle_right";
-      src = ./.;
-      board = "sofle_right";
-      shield = "nice_view_adapter nice_view";
-      zephyrDepsHash = "sha256-H/ZlKyRiEZmDkVE3SSVcFsEF9tQ7XOCgbQ2tPpO2Pys=";
+      buildInputs = [
+        (zephyr.sdk.override {
+          targets = [
+            "arm-zephyr-eabi"
+          ];
+        })
+        west2nixHook
+        zephyr.pythonEnv
+        zephyr.hosttools-nix
+        gitMinimal
+        cmake
+        ninja
+      ];
+      dontUseCmakeConfigure = true;
+      buildPhase = ''
+        ls -alh
+        false
+      '';
+      westBuildFlags = [
+        "-s"
+        "zmk/app"
+        "-b"
+        "nice_nano_v2"
+        "--"
+        "-DZMK_CONFIG=config"
+        "-SHIELD=setting_reset"
+      ];
+      installPhase = ''
+        mkdir $out
+        cp ./build/zephyr/zephyr.elf $out/
+      '';
     };
   };
 }
