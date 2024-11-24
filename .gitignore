@@ -1,7 +1,9 @@
-build/
-zmk/
-modules/
-tools/
-.west/
+/build/
+/zmk/
+/zephyr/
+/modules/
+/tools/
+/.west/
+/urchin-peripheral-animation
 
 /.direnv
