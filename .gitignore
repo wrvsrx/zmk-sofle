@@ -3,6 +3,7 @@
 /zephyr/
 /modules/
 /tools/
+/optional
 /.west/
 /urchin-peripheral-animation
 
