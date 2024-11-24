@@ -5,8 +5,8 @@
     flake-lock.url = "github:wrvsrx/flake-lock";
     nixpkgs.follows = "flake-lock/nixpkgs";
     flake-parts.follows = "flake-lock/flake-parts";
-    zmk-nix = {
-      url = "github:lilyinstarlight/zmk-nix";
+    west2nix = {
+      url = "github:adisbladis/west2nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -23,13 +23,12 @@
             s = pkgs.callPackage ./. { };
           in
           rec {
-            _module.args.pkgs = import inputs.nixpkgs {
-              inherit system;
-              overlays = [ inputs.zmk-nix.overlays.default ];
-            };
 
-            inherit (s) packages;
-            # devShells.default = pkgs.mkShell { inputsFrom = [ packages.default ]; };
+            # inherit (s) packages;
+            devShells.default = pkgs.mkShell {
+              # inputsFrom = [ packages.default ];
+              nativeBuildInputs = [ inputs.west2nix.packages.${system}.default ];
+            };
             formatter = pkgs.nixfmt-rfc-style;
           };
       }
