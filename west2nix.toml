@@ -1,0 +1,30 @@
+[[manifest.projects]]
+name = "zmk"
+url = "https://github.com/petejohanson/zmk"
+revision = "bc75de59f74e9913c810ab358e4d26cdfebfb157"
+clone-depth = 1
+west-commands = "scripts/west-commands.yml"
+
+[manifest.projects.nix]
+hash = "sha256-qaSmuQF5ChYHad+b2z+o+uBIyH4c/V4tjWr412kFkiE="
+
+[[manifest.projects]]
+name = "urchin-peripheral-animation"
+url = "https://github.com/GPeye/urchin-peripheral-animation"
+revision = "8b79464acfa8bb4c668e53049ad28b57889f2fe1"
+clone-depth = 1
+
+[manifest.projects.nix]
+hash = "sha256-NbUmQOCmmZ4KgMy1lo4R68JY1h3LC4ns4qq13XHKTWc="
+
+[[manifest.projects]]
+name = "zephyr"
+url = "https://github.com/zmkfirmware/zephyr"
+revision = "349c50a6826d81aaa6f839208de9884e0973ac4d"
+clone-depth = 1
+
+[manifest.projects.nix]
+hash = "sha256-9cFVOxMeTuiQmk68Od+PcRoFzlY/IB3Ms/DePEfVHM4="
+
+[manifest.self]
+path = "config"
