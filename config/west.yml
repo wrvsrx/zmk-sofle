@@ -1,4 +1,7 @@
 manifest:
+  group-filter:
+    - +optional
+    - +babblesim
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
