@@ -53,7 +53,7 @@ in
   packages = rec {
     sofle_reset = buildSofle {
       board = "nice_nano_v2";
-      shields = [ "settings_left" ];
+      shields = [ "settings_reset" ];
     };
     sofle_left = buildSofle {
       board = "sofle_left";
