@@ -33,22 +33,19 @@ in
         ninja
       ];
       dontUseCmakeConfigure = true;
-      buildPhase = ''
-        ls -alh
-        false
-      '';
+      env.Zephyr_DIR = "../zephyr/share/zephyr-package/cmake";
       westBuildFlags = [
         "-s"
-        "zmk/app"
+        "../zmk/app"
         "-b"
         "nice_nano_v2"
         "--"
-        "-DZMK_CONFIG=config"
-        "-SHIELD=setting_reset"
+        "-DZMK_CONFIG=."
+        "-DSHIELD=settings_reset"
       ];
       installPhase = ''
         mkdir $out
-        cp ./build/zephyr/zephyr.elf $out/
+        cp ./build/zephyr/zmk.elf $out/
       '';
     };
   };
