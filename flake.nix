@@ -36,7 +36,14 @@
               env = {
                 Zephyr_DIR = "../zephyr/share/zephyr-package/cmake";
               };
-              nativeBuildInputs = [ inputs.west2nix.packages.${system}.default ];
+              nativeBuildInputs =
+                let
+                  pythonPackages = import ./nix { inherit pkgs; };
+                in
+                [
+                  inputs.west2nix.packages.${system}.default
+                  pythonPackages.keymap-drawer
+                ];
             };
             formatter = pkgs.nixfmt-rfc-style;
           };
