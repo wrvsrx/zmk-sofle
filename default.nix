@@ -6,8 +6,8 @@
   ninja,
   west2nix,
   gitMinimal,
-  gcc-arm-embedded,
   lib,
+  symlinkJoin,
 }:
 
 let
@@ -50,7 +50,7 @@ let
     };
 in
 {
-  packages = {
+  packages = rec {
     sofle_reset = buildSofle {
       board = "nice_nano_v2";
       shields = [ "settings_left" ];
@@ -67,6 +67,14 @@ in
       shields = [
         "nice_view_adapter"
         "nice_view"
+      ];
+    };
+    default = symlinkJoin {
+      name = "sofle-firmware";
+      paths = [
+        sofle_reset
+        sofle_left
+        sofle_right
       ];
     };
   };
