@@ -32,6 +32,10 @@
             inherit (s) packages;
             devShells.default = pkgs.mkShell {
               inputsFrom = [ packages.sofle_reset ];
+
+              env = {
+                Zephyr_DIR = "../zephyr/share/zephyr-package/cmake";
+              };
               nativeBuildInputs = [ inputs.west2nix.packages.${system}.default ];
             };
             formatter = pkgs.nixfmt-rfc-style;
