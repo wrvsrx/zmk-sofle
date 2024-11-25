@@ -31,7 +31,7 @@
           rec {
             inherit (s) packages;
             devShells.default = pkgs.mkShell {
-              # inputsFrom = [ packages.default ];
+              inputsFrom = [ packages.sofle_reset ];
               nativeBuildInputs = [ inputs.west2nix.packages.${system}.default ];
             };
             formatter = pkgs.nixfmt-rfc-style;
