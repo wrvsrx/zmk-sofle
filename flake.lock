@@ -178,15 +178,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1724558258,
-        "narHash": "sha256-77ql77+A+sCaS40ptGTfB3XI9JBJxpYkXKP5HUehMi4=",
-        "owner": "adisbladis",
+        "lastModified": 1732537110,
+        "narHash": "sha256-t4W4LzYpDa6GcPDN66zGX1u4VTrnsyoMuRFO2XGxsdc=",
+        "owner": "wrvsrx",
         "repo": "west2nix",
-        "rev": "fcb15bcd8de84e60724050f60057e5fd0a7423f0",
+        "rev": "3ac264ef55d48892b61d34b3ef63835df5a4d4ec",
         "type": "github"
       },
       "original": {
-        "owner": "adisbladis",
+        "owner": "wrvsrx",
         "repo": "west2nix",
         "type": "github"
       }

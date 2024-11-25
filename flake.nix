@@ -6,7 +6,7 @@
     nixpkgs.follows = "flake-lock/nixpkgs";
     flake-parts.follows = "flake-lock/flake-parts";
     west2nix = {
-      url = "github:adisbladis/west2nix";
+      url = "github:wrvsrx/west2nix";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.zephyr-nix.follows = "zephyr-nix";
     };
