@@ -73,7 +73,7 @@ path = "modules/audio/sof"
 groups = ["optional"]
 
 [manifest.projects.nix]
-hash = "sha256-/RPgYRPFK3LpG2oibhthbkxBgcutNg2YK7KodPtpSsY="
+hash = "sha256-9zZ9nCXH5R0SS45M7zY0xp3IIzBNmJcWfM+RJRTI1HI="
 
 [[manifest.projects]]
 name = "tf-m-tests"
@@ -400,7 +400,7 @@ path = "modules/hal/rpi_pico"
 groups = ["hal"]
 
 [manifest.projects.nix]
-hash = "sha256-qv0GPlBQ0np8a0obi5pt6LyxKiTIqWEhoG7vI4jLAwc="
+hash = "sha256-oJQPq//mAxAQW8QzxixbiHJsMMANtQl3BevMUL9Kv5g="
 
 [[manifest.projects]]
 name = "hal_stm32"
@@ -420,7 +420,7 @@ path = "modules/hal/telink"
 groups = ["hal"]
 
 [manifest.projects.nix]
-hash = "sha256-H50e/YCXk1oa7MSyW1czZ09S4GOhp7e2BDIKyr/Fn5o="
+hash = "sha256-ioHMx0rpbRppxAoT5yLcIHgLhoO9vyuas9YwaOEyvtQ="
 
 [[manifest.projects]]
 name = "hal_wurthelektronik"
@@ -488,7 +488,7 @@ path = "modules/debug/mipi-sys-t"
 groups = ["debug"]
 
 [manifest.projects.nix]
-hash = "sha256-O5BkXoaCj3xxRsaoarDcCSxhovhH0ihvmY0COy6BQK0="
+hash = "sha256-IVOOcEJZx/jzTGfm+1WJatzYsw5+URzSeIxq92bjm2w="
 
 [[manifest.projects]]
 name = "nrf_hw_models"
@@ -564,7 +564,7 @@ revision = "5fe2cb613bd7e4590bd1b00c2adf181ac0229379"
 path = "modules/lib/uoscore-uedhoc"
 
 [manifest.projects.nix]
-hash = "sha256-rb2A6iEkW82GJks6jAv8zL33EgGHEn1dKxzuueKiYXw="
+hash = "sha256-Ag/pFDX5SCirxhO8ducHs1I/yXdq1tsj20EN16LrH0A="
 
 [[manifest.projects]]
 name = "zcbor"
