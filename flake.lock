@@ -178,11 +178,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1732537110,
-        "narHash": "sha256-t4W4LzYpDa6GcPDN66zGX1u4VTrnsyoMuRFO2XGxsdc=",
+        "lastModified": 1733107638,
+        "narHash": "sha256-UPLpBUfibim6pWPDby3GHxjmMivIQqMJNWQp+SWMmvk=",
         "owner": "wrvsrx",
         "repo": "west2nix",
-        "rev": "3ac264ef55d48892b61d34b3ef63835df5a4d4ec",
+        "rev": "0b76dacb3a82da9d206e7db6086492972ef22905",
         "type": "github"
       },
       "original": {
