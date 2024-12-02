@@ -24,7 +24,9 @@
           { pkgs, system, ... }:
           let
             s = pkgs.callPackage ./. {
-              west2nix = inputs.west2nix.lib.mkWest2nix { inherit pkgs; };
+              inherit (inputs.west2nix.lib.mkWest2nix { inherit pkgs; })
+                mkWestDependencies
+                ;
               zephyr = inputs.zephyr-nix.packages.${system};
             };
           in
