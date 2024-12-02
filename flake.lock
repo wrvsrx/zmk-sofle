@@ -125,15 +125,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1731223003,
-        "narHash": "sha256-hFf8/IeZKPUubMC452Mm+JiAEnvcw/a4Cvn2bcpeJqs=",
-        "owner": "nix-community",
+        "lastModified": 1733109592,
+        "narHash": "sha256-qQd6K8RYZpwEeawyqSnDkFCPZAIbz8c7BP9490EsgQM=",
+        "owner": "wrvsrx",
         "repo": "pyproject.nix",
-        "rev": "359dd9cd562730bbd31ab164832aae4dacd9c302",
+        "rev": "9ec41f2fde25b69aa32231047a0cb9e7ed748501",
         "type": "github"
       },
       "original": {
-        "owner": "nix-community",
+        "owner": "wrvsrx",
+        "ref": "fix-is-path",
         "repo": "pyproject.nix",
         "type": "github"
       }
@@ -178,33 +179,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1733107638,
-        "narHash": "sha256-UPLpBUfibim6pWPDby3GHxjmMivIQqMJNWQp+SWMmvk=",
+        "lastModified": 1733110333,
+        "narHash": "sha256-nnotjwL601i3PfA0I1zvYSVTHjFU/Xyq5VgAgINM43I=",
         "owner": "wrvsrx",
         "repo": "west2nix",
-        "rev": "0b76dacb3a82da9d206e7db6086492972ef22905",
+        "rev": "93079cdd5cca004842a1981a9b9785a2db2c28c8",
         "type": "github"
       },
       "original": {
         "owner": "wrvsrx",
         "repo": "west2nix",
-        "type": "github"
-      }
-    },
-    "zephyr": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1721992675,
-        "narHash": "sha256-rmOHH0uRU27U2T4w4+FEMcAcuiZ7W7p4vOwtSwiAFNY=",
-        "owner": "zephyrproject-rtos",
-        "repo": "zephyr",
-        "rev": "36940db938a8f4a1e919496793ed439850a221c2",
-        "type": "github"
-      },
-      "original": {
-        "owner": "zephyrproject-rtos",
-        "ref": "v3.7.0",
-        "repo": "zephyr",
         "type": "github"
       }
     },
@@ -214,19 +198,18 @@
         "nixpkgs": [
           "nixpkgs"
         ],
-        "pyproject-nix": "pyproject-nix",
-        "zephyr": "zephyr"
+        "pyproject-nix": "pyproject-nix"
       },
       "locked": {
-        "lastModified": 1731288812,
-        "narHash": "sha256-lFY/q8f6fZYZNHHshUUqgi92BsHIwgoVtqXIFa8zhxE=",
-        "owner": "adisbladis",
+        "lastModified": 1733110249,
+        "narHash": "sha256-Yiy19VVMl1FBNxIUn3lu0FMl50Gtxj7AGdsdp3FSftc=",
+        "owner": "wrvsrx",
         "repo": "zephyr-nix",
-        "rev": "d54fd58912e8d3f5787c01831ccefd0349bfdd0e",
+        "rev": "5b8b315a0b78e56362e336d5d2f0ec350fffb830",
         "type": "github"
       },
       "original": {
-        "owner": "adisbladis",
+        "owner": "wrvsrx",
         "repo": "zephyr-nix",
         "type": "github"
       }

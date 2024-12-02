@@ -10,8 +10,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.zephyr-nix.follows = "zephyr-nix";
     };
-    zephyr-nix.url = "github:adisbladis/zephyr-nix";
-    zephyr-nix.inputs.nixpkgs.follows = "nixpkgs";
+    zephyr-nix = {
+      url = "github:wrvsrx/zephyr-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -36,7 +38,7 @@
               inputsFrom = [ packages.sofle_reset ];
 
               env = {
-                Zephyr_DIR = "../zephyr/share/zephyr-package/cmake";
+                Zephyr_DIR = "zephyr/share/zephyr-package/cmake";
               };
               nativeBuildInputs =
                 let

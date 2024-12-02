@@ -32,7 +32,9 @@ let
       name = board;
       src = ./.;
       nativeBuildInputs = [
-        zephyr.pythonEnv
+        (zephyr.pythonEnv.override {
+          zephyr-src = westDependencies + "/zephyr";
+        })
         zephyr.hosttools-nix
         gitMinimal
         cmake
