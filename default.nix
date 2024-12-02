@@ -4,7 +4,7 @@
   callPackage,
   cmake,
   ninja,
-  mkWestDependencies,
+  mkWest2nixHook,
   gitMinimal,
   lib,
   symlinkJoin,
@@ -12,28 +12,18 @@
 }:
 
 let
-  westDependencies = mkWestDependencies {
-    west2nixToml = ./west2nix.toml;
+  west2nixHook = mkWest2nixHook {
+    manifest = ./west2nix.toml;
   };
   buildSofle =
     { board, shields }:
-    let
-      westBuildFlags = [
-        "-s"
-        "zmk/app"
-        "-b"
-        board
-        "--"
-        "-DZMK_CONFIG=${./config}"
-        "-DSHIELD=${lib.concatStringsSep ";" shields}"
-      ];
-    in
     stdenv.mkDerivation {
       name = board;
       src = ./.;
       nativeBuildInputs = [
+        west2nixHook
         (zephyr.pythonEnv.override {
-          zephyr-src = westDependencies + "/zephyr";
+          zephyr-src = west2nixHook.westDeps + "/zephyr";
         })
         zephyr.hosttools-nix
         gitMinimal
@@ -47,15 +37,17 @@ let
           ];
         })
       ];
+      westBuildFlags = [
+        "-s"
+        "../zmk/app"
+        "-b"
+        board
+        "--"
+        "-DZMK_CONFIG=${./config}"
+        "-DSHIELD=${lib.concatStringsSep ";" shields}"
+      ];
       dontUseCmakeConfigure = true;
-      configurePhase = ''
-        cp --no-preserve=mode -r ${westDependencies}/* .
-        west init -l config
-      '';
-      buildPhase = ''
-        west build ${lib.escapeShellArgs westBuildFlags}
-      '';
-      env.Zephyr_DIR = "zephyr/share/zephyr-package/cmake";
+      env.Zephyr_DIR = "../zephyr/share/zephyr-package/cmake";
       installPhase = ''
         mkdir $out
         cp ./build/zephyr/zmk.uf2 $out/$name.uf2
@@ -64,7 +56,6 @@ let
 in
 {
   packages = rec {
-    inherit westDependencies;
     sofle_reset = buildSofle {
       board = "nice_nano_v2";
       shields = [ "settings_reset" ];

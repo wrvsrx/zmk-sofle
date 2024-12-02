@@ -27,7 +27,7 @@
           let
             s = pkgs.callPackage ./. {
               inherit (inputs.west2nix.lib.mkWest2nix { inherit pkgs; })
-                mkWestDependencies
+                mkWest2nixHook
                 ;
               zephyr = inputs.zephyr-nix.packages.${system};
             };
@@ -38,7 +38,7 @@
               inputsFrom = [ packages.sofle_reset ];
 
               env = {
-                Zephyr_DIR = "zephyr/share/zephyr-package/cmake";
+                Zephyr_DIR = "../zephyr/share/zephyr-package/cmake";
               };
               nativeBuildInputs =
                 let
