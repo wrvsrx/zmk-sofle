@@ -5,6 +5,13 @@
     flake-lock.url = "github:wrvsrx/flake-lock";
     nixpkgs.follows = "flake-lock/nixpkgs";
     flake-parts.follows = "flake-lock/flake-parts";
+    nur-wrvsrx = {
+      url = "github:wrvsrx/nur-packages";
+      inputs.flake-lock.follows = "flake-lock";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+      inputs.nix-update.follows = "";
+    };
     west2nix = {
       url = "github:wrvsrx/west2nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -24,30 +31,30 @@
         systems = [ "x86_64-linux" ];
         perSystem =
           { pkgs, system, ... }:
-          let
-            s = pkgs.callPackage ./. {
-              inherit (inputs.west2nix.lib.mkWest2nix { inherit pkgs; })
-                mkWest2nixHook
-                ;
-              zephyr = inputs.zephyr-nix.packages.${system};
-            };
-          in
           rec {
-            inherit (s) packages;
+            _module.args.pkgs = import inputs.nixpkgs {
+              inherit system;
+              overlays = [
+                inputs.nur-wrvsrx.overlays.default
+                (final: prev: {
+                  inherit (inputs.west2nix.lib.mkWest2nix { pkgs = prev; })
+                    mkWest2nixHook
+                    ;
+                  zephyr = inputs.zephyr-nix.packages.${system};
+                })
+              ];
+            };
+            inherit (pkgs.callPackage ./. { }) packages;
             devShells.default = pkgs.mkShell {
               inputsFrom = [ packages.sofle_reset ];
 
               env = {
                 Zephyr_DIR = "../zephyr/share/zephyr-package/cmake";
               };
-              nativeBuildInputs =
-                let
-                  pythonPackages = import ./nix { inherit pkgs; };
-                in
-                [
-                  inputs.west2nix.packages.${system}.default
-                  pythonPackages.keymap-drawer
-                ];
+              nativeBuildInputs = [
+                inputs.west2nix.packages.${system}.default
+                pkgs.python3.pkgs.keymap-drawer
+              ];
             };
             formatter = pkgs.nixfmt-rfc-style;
           };
