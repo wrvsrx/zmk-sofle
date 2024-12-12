@@ -23,7 +23,7 @@ let
       nativeBuildInputs = [
         west2nixHook
         (zephyr.pythonEnv.override {
-          zephyr-src = west2nixHook.westDeps + "/zephyr";
+          zephyr-src = (lib.lists.findFirst (x: x.name == "zephyr") null west2nixHook.projectsWithFakeGit).src;
         })
         zephyr.hosttools-nix
         gitMinimal
