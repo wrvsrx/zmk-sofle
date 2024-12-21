@@ -44,7 +44,12 @@
                 })
               ];
             };
-            inherit (pkgs.callPackage ./. { }) packages;
+            inherit
+              (pkgs.callPackage ./. {
+                inherit (pkgs.python3.pkgs) keymap-drawer;
+              })
+              packages
+              ;
             devShells.default = pkgs.mkShell {
               inputsFrom = [ packages.sofle_reset ];
 
