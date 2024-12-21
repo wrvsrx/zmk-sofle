@@ -1,7 +1,7 @@
 {
   stdenv,
   stdenvNoCC,
-  python3,
+  keymap-drawer,
   zephyr, # from zephyr-nix
   callPackage,
   cmake,
@@ -80,9 +80,7 @@ in
     sofle-keymap = stdenvNoCC.mkDerivation {
       name = "sofle-keymap";
       src = ./.;
-      nativeBuildInputs = [
-        python3.pkgs.keymap-drawer
-      ];
+      nativeBuildInputs = [ keymap-drawer ];
       buildPhase = ''
         keymap -c keymap-drawer/config.yaml parse -z config/sofle.keymap > sofle.yaml
         XDG_CACHE_HOME=$PWD/keymap-drawer/cache keymap -c keymap-drawer/config.yaml draw -j config/sofle.json sofle.yaml > sofle.svg
