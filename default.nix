@@ -1,5 +1,7 @@
 {
   stdenv,
+  stdenvNoCC,
+  python3,
   zephyr, # from zephyr-nix
   callPackage,
   cmake,
@@ -23,7 +25,8 @@ let
       nativeBuildInputs = [
         west2nixHook
         (zephyr.pythonEnv.override {
-          zephyr-src = (lib.lists.findFirst (x: x.name == "zephyr") null west2nixHook.projectsWithFakeGit).src;
+          zephyr-src =
+            (lib.lists.findFirst (x: x.name == "zephyr") null west2nixHook.projectsWithFakeGit).src;
         })
         zephyr.hosttools-nix
         gitMinimal
@@ -74,12 +77,28 @@ in
         "nice_view"
       ];
     };
+    sofle-keymap = stdenvNoCC.mkDerivation {
+      name = "sofle-keymap";
+      src = ./.;
+      nativeBuildInputs = [
+        python3.pkgs.keymap-drawer
+      ];
+      buildPhase = ''
+        keymap -c keymap-drawer/config.yaml parse -z config/sofle.keymap > sofle.yaml
+        XDG_CACHE_HOME=$PWD/keymap-drawer/cache keymap -c keymap-drawer/config.yaml draw -j config/sofle.json sofle.yaml > sofle.svg
+      '';
+      installPhase = ''
+        mkdir -p $out
+        cp sofle.svg $out
+      '';
+    };
     default = symlinkJoin {
       name = "sofle-firmware";
       paths = [
         sofle_reset
         sofle_left
         sofle_right
+        sofle-keymap
       ];
     };
   };
