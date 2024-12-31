@@ -18,9 +18,13 @@ let
     manifest = ./west2nix.toml;
   };
   buildSofle =
-    { board, shields }:
+    {
+      name ? board,
+      board,
+      shields,
+    }:
     stdenv.mkDerivation {
-      name = board;
+      inherit name;
       src = ./.;
       nativeBuildInputs = [
         west2nixHook
@@ -60,6 +64,7 @@ in
 {
   packages = rec {
     eyelash_sofle_reset = buildSofle {
+      name = "eyelash_sofle_reset";
       board = "eyelash_sofle_left";
       shields = [ "settings_reset" ];
     };
@@ -77,7 +82,7 @@ in
       nativeBuildInputs = [ keymap-drawer ];
       buildPhase = ''
         keymap -c keymap-drawer/config.yaml parse -z config/eyelash_sofle.keymap > eyelash_sofle.yaml
-        XDG_CACHE_HOME=$PWD/keymap-drawer/cache keymap -c keymap-drawer/config.yaml draw -j config/eyelash_sofle.json eyelash_sofle.yaml > sofle.svg
+        XDG_CACHE_HOME=$PWD/keymap-drawer/cache keymap -c keymap-drawer/config.yaml draw -j config/eyelash_sofle.json eyelash_sofle.yaml > eyelash_sofle.svg
       '';
       installPhase = ''
         mkdir _p $out
