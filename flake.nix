@@ -51,7 +51,7 @@
               packages
               ;
             devShells.default = pkgs.mkShell {
-              inputsFrom = [ packages.sofle_reset ];
+              inputsFrom = [ packages.eyelash_sofle_reset ];
 
               env = {
                 Zephyr_DIR = "../zephyr/share/zephyr-package/cmake";
