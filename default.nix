@@ -46,7 +46,7 @@ let
         "-b"
         board
         "--"
-        "-DZMK_CONFIG=${./config}"
+        ("-DZMK_CONFIG=${./.}" + "/config")
         "-DSHIELD=${lib.concatStringsSep ";" shields}"
       ];
       dontUseCmakeConfigure = true;
@@ -59,44 +59,38 @@ let
 in
 {
   packages = rec {
-    sofle_reset = buildSofle {
-      board = "nice_nano_v2";
+    eyelash_sofle_reset = buildSofle {
+      board = "eyelash_sofle_left";
       shields = [ "settings_reset" ];
     };
-    sofle_left = buildSofle {
-      board = "sofle_left";
-      shields = [
-        "nice_view_adapter"
-        "nice_view"
-      ];
+    eyelash_sofle_left = buildSofle {
+      board = "eyelash_sofle_left";
+      shields = [ "nice_view" ];
     };
-    sofle_right = buildSofle {
-      board = "sofle_right";
-      shields = [
-        "nice_view_adapter"
-        "nice_view"
-      ];
+    eyelash_sofle_right = buildSofle {
+      board = "eyelash_sofle_right";
+      shields = [ "nice_view_custom" ];
     };
-    sofle-keymap = stdenvNoCC.mkDerivation {
-      name = "sofle-keymap";
+    eyelash_sofle_keymap = stdenvNoCC.mkDerivation {
+      name = "eyelash_sofle_keymap";
       src = ./.;
       nativeBuildInputs = [ keymap-drawer ];
       buildPhase = ''
-        keymap -c keymap-drawer/config.yaml parse -z config/sofle.keymap > sofle.yaml
-        XDG_CACHE_HOME=$PWD/keymap-drawer/cache keymap -c keymap-drawer/config.yaml draw -j config/sofle.json sofle.yaml > sofle.svg
+        keymap -c keymap-drawer/config.yaml parse -z config/eyelash_sofle.keymap > eyelash_sofle.yaml
+        XDG_CACHE_HOME=$PWD/keymap-drawer/cache keymap -c keymap-drawer/config.yaml draw -j config/eyelash_sofle.json eyelash_sofle.yaml > sofle.svg
       '';
       installPhase = ''
-        mkdir -p $out
+        mkdir _p $out
         cp sofle.svg $out
       '';
     };
     default = symlinkJoin {
       name = "sofle-firmware";
       paths = [
-        sofle_reset
-        sofle_left
-        sofle_right
-        sofle-keymap
+        eyelash_sofle_reset
+        eyelash_sofle_left
+        eyelash_sofle_right
+        eyelash_sofle_keymap
       ];
     };
   };
