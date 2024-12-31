@@ -86,7 +86,7 @@ in
       '';
       installPhase = ''
         mkdir _p $out
-        cp sofle.svg $out
+        cp eyelash_sofle.svg $out
       '';
     };
     default = symlinkJoin {
