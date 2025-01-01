@@ -10,6 +10,7 @@
   gitMinimal,
   lib,
   symlinkJoin,
+  qemu,
   runCommand,
 }:
 
@@ -32,7 +33,7 @@ let
           zephyr-src =
             (lib.lists.findFirst (x: x.name == "zephyr") null west2nixHook.projectsWithFakeGit).src;
         })
-        zephyr.hosttools-nix
+        (zephyr.hosttools-nix.override { qemu_full = qemu; })
         gitMinimal
         cmake
         ninja
