@@ -91,7 +91,7 @@ in
       '';
     };
     default = symlinkJoin {
-      name = "sofle-firmware";
+      name = "eyelash_sofle_firmware";
       paths = [
         eyelash_sofle_reset
         eyelash_sofle_left
