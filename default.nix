@@ -12,6 +12,7 @@
   symlinkJoin,
   qemu,
   runCommand,
+  python3,
 }:
 
 let
@@ -30,6 +31,8 @@ let
       nativeBuildInputs = [
         west2nixHook
         (zephyr.pythonEnv.override {
+          # use python3 after nur overlay
+          inherit python3;
           zephyr-src =
             (lib.lists.findFirst (x: x.name == "zephyr") null west2nixHook.projectsWithFakeGit).src;
         })
