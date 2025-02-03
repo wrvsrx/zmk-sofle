@@ -10,7 +10,6 @@
       inputs.flake-lock.follows = "flake-lock";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-parts.follows = "flake-parts";
-      inputs.nix-update.follows = "";
     };
     west2nix = {
       url = "github:wrvsrx/west2nix";
