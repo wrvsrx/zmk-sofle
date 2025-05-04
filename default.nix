@@ -13,6 +13,8 @@
   qemu,
   runCommand,
   python3,
+  bash,
+  which,
 }:
 
 let
@@ -40,6 +42,7 @@ let
         gitMinimal
         cmake
         ninja
+        which
       ];
       buildInputs = [
         (zephyr.sdk.override {
@@ -58,6 +61,11 @@ let
         "-DSHIELD=${lib.concatStringsSep ";" shields}"
       ];
       dontUseCmakeConfigure = true;
+      preBuild = ''
+        sed -i "s|#!/usr/bin/env python3|#!$(which python)|g" \
+          ../modules/lib/nanopb/generator/protoc \
+          ../modules/lib/nanopb/generator/protoc-gen-nanopb
+      '';
       env.Zephyr_DIR = "../zephyr/share/zephyr-package/cmake";
       installPhase = ''
         mkdir $out
