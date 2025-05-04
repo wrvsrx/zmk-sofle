@@ -2,22 +2,25 @@
   description = "flake template";
 
   inputs = {
-    flake-lock.url = "github:wrvsrx/flake-lock";
-    nixpkgs.follows = "flake-lock/nixpkgs";
-    flake-parts.follows = "flake-lock/flake-parts";
+    nixpkgs.url = "github:wrvsrx/nixpkgs/patched-nixos-unstable";
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
+    flake-utils.url = "github:numtide/flake-utils";
     nur-wrvsrx = {
       url = "github:wrvsrx/nur-packages";
-      inputs.flake-lock.follows = "flake-lock";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-parts.follows = "flake-parts";
+      inputs.flake-utils.follows = "flake-utils";
     };
     west2nix = {
-      url = "github:wrvsrx/west2nix";
+      url = "github:wrvsrx/west2nix/patched-master";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.zephyr-nix.follows = "zephyr-nix";
     };
     zephyr-nix = {
-      url = "github:wrvsrx/zephyr-nix";
+      url = "github:adisbladis/zephyr-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
